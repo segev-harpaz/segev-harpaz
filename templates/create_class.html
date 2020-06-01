@@ -1,0 +1,74 @@
+<html>
+<head>
+	<style>
+		table, td {
+			border: 1px solid black;
+			border-collapse: collapse;
+		}
+	</style>
+</head>
+<body>
+	<center>
+	</center>
+	<form>
+		<select>
+		<option>delete student</option>
+		<option>change the connection status</option>
+		</select>
+		<input type="text" id='delete' placeholder="student's name">
+	</form>
+	<form action="http://localhost:5000/sign_in2/create_class/to_database" method="POST" name="form1" id="from1">
+		<span name="sun" id="sun">creaste class</span>
+		<input type="text" placeholder="class's name">
+
+		<span name="sun" id="sun">Sunday</span>
+		<select name="sunday" id="sunday">
+			<option>none</option>
+			<option>8:00-9:30</option>
+			<option>10:00-11:30</option>
+			<option>12:00-13:30</option>
+		</select>
+
+		<span name="mon" id="mon">Monday</span>
+		<select name="monday" id="monday">
+			<option>none</option>
+			<option>8:00-9:30</option>
+			<option>10:00-11:30</option>
+			<option>12:00-13:30</option>
+		</select>
+
+		<span name="tue" id="tue">Tuesday</span>
+		<select name="tuesday" id="tuesday">
+			<option>none</option>
+			<option>8:00-9:30</option>
+			<option>10:00-10:45</option>
+			<option>12:00-13:30</option>
+		</select>
+
+		<span name="wen" id="wen">Wensday</span>
+		<select name="wensday" id="wensday">
+			<option>none</option>
+			<option>8:00-9:30</option>
+			<option>10:00-11:30</option>
+			<option>12:00-13:30</option>
+		</select>
+
+		<span name="thu" id="thu">Thursday</span>
+		<select name="thursday" id="thursday">
+			<option>none</option>
+			<option>8:00-9:30</option>
+			<option>10:00-11:30</option>
+			<option>12:00-13:30</option>
+		</select>
+
+		<span name="fri" id="fri">Friday</span>
+		<select name="friday" id="friday">
+			<option>none</option>
+			<option>8:00-9:30</option>
+			<option>10:00-11:30</option>
+			<option>12:00-13:30</option>
+		</select>
+		<input type="submit" value="create class">
+	</form>
+</body>
+</html>

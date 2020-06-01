@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+        <link rel="stylesheet" type="text/css" href="ProjectCss.css">
+</head>
+    <body style="background-color:black;">
+            <br/><br/><br/><br/>
+                <form  name = "form1" id = "from1"  onsubmit="IDValidator();return false" method="POST" action="http://localhost:5000/result">
+                    <span name = "dudu" id ="dudu">
+                    <input type="text" name="name" id="name" placeholder="Name"><br/><br/>
+                        <p id="demo0" name="demo0"></p>
+                        <input type="password" name="PP" id="PP" placeholder="password" ><br/><br/>
+                        <p id="demo1" name="demo1"></p>
+                        <input type="text" name="id" id="id" placeholder="id"><br/><br/>
+                        <center><p id="demo" name="demo">hello</p></center>
+                        <input type="submit" value="submit" id="this" name="this">
+                        <br/><br/><br/><br/>
+                    </span>
+                    <span name = "sun" id = "sun">choose class</span>
+                    <select name = "Cclass" id = "Cclass">
+                            <option >your class</option>
+                            <option>cyber_10_grade</option>
+                            <option>cyber_11_grade</option>
+                            <option>cyber_12_grade</option>
+                        </select>    
+            </form>
+            <span name = "signin1" id = "signin1">
+            <form action="http://localhost:5000/sign_in" method="POST">
+                 <input type="submit" value="sign in" id="signin" name="signin">
+            </form>
+        </span>
+   </body>
+</html>

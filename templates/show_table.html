@@ -1,0 +1,28 @@
+<html>
+<head>
+	<style>
+		table, td {
+			border: 1px solid black;
+			border-collapse: collapse;
+		}
+	</style>
+</head>
+<body>
+	<center>
+		<table>
+			{% for row in table %}
+			<tr>
+				{% for i in row %}
+				<td> {{ i }} </td>
+				{% endfor %}
+			</tr>
+			{% endfor %}
+		</table>
+		<br />
+		<form method="POST" action="http://localhost:5000/sign_in2/show_table/delete">
+			<input type="text" id='delete' placeholder="student's name">
+			<input type="submit" value="delete">
+		</form>
+	</center>
+</body>
+</html>

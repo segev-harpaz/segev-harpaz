@@ -1,0 +1,218 @@
+<html>
+<head>
+	<style>
+
+		table, td {
+			border: 1px solid black;
+			border-collapse: collapse;
+		}
+
+		input[type=text], select {
+			width: 15.5%;
+			padding: 12px 20px;
+			margin: 8px 0;
+			display: inline-block;
+			border: 1px solid #ccc;
+			border-radius: 4px;
+			box-sizing: border-box;
+			position: fixed;
+			top:15%;
+			left: 30%;
+		}
+
+		input[type=password], select {
+			width: 15.5%;
+			padding: 12px 20px;
+			margin: 8px 0;
+			display: inline-block;
+			border: 1px solid #ccc;
+			border-radius: 4px;
+			box-sizing: border-box;
+			position: fixed;
+			left: 30%;
+		}
+
+		input[type=submit]:hover {
+			background-color: #45a049;
+		}
+
+		#this {
+			width: 15.5%;
+			background-color: #4CAF50;
+			color: white;
+			padding: 14px 20px;
+			margin: 8px 0;
+			border: none;
+			border-radius: 4px;
+			cursor: pointer;
+			position: fixed;
+			left: 30%;
+			top: 26%;
+		}
+		#that{
+			width: 15.5%;
+			background-color: #4CAF50;
+			color: white;
+			padding: 14px 20px;
+			margin: 8px 0;
+			border: none;
+			border-radius: 4px;
+			cursor: pointer;
+			position: fixed;
+			left: 12%;
+			top: 26%;
+		}
+		#sunday{
+      position: fixed;
+      left: 46.5%;
+      top : 15%;
+  }
+		 #sun{
+      position: fixed;
+      left: 47%;
+      top : 11.5%;
+      color:white;
+      font-size:150%;
+  }
+  #monday{
+      position: fixed;
+      left: 46.5%;
+      top : 25.5%;
+  }
+  #mon{
+      position: fixed;
+      left: 47%;
+      top : 22%;
+      color:white;
+      font-size:150%;
+  }
+  #tuesday{
+      position: fixed;
+      left: 46.5%;
+      top : 36%;
+  }
+  #tue{
+      position: fixed;
+      left: 47%;
+      top : 32.5%;
+      color:white;
+      font-size:150%;
+  }
+  #wensday{
+      position: fixed;
+      left: 63%;
+      top : 15%;
+  }
+  #wen{
+      position: fixed;
+      left: 63.5%;
+      top : 11.5%;
+      color:white;
+      font-size:150%;
+  }
+  #thursday{
+      position: fixed;
+      left: 63%;
+      top : 25.5%;
+  }
+  #thu{
+      position: fixed;
+      left: 63.5%;
+      top : 22%;
+      color:white;
+      font-size:150%;
+  }
+  
+  #friday{
+      position: fixed;
+      left: 63%;
+      top : 36%;
+  }
+  #fri{
+      position: fixed;
+      left: 63.5%;
+      top : 32.5%;
+      color:white;
+      font-size:150%;
+  }
+  #create{
+	  color:white;
+      font-size:250%;
+	  position:fixed;
+	  left:37%;
+  }
+  #class_name{
+	  position:fixed;
+	  left:12%;
+	  top:15%;
+  }
+	</style>
+</head>
+<body style='background-color:black;'>
+	<center>
+	</center>
+	<form action="http://localhost:5000/result" method="POST" name="form1" id="from1">
+		<span name="create" id="create">create class</span>
+		<input type="text" placeholder="class's name" id="asd" name="asd">
+
+		<span name="sun" id="sun">Sunday</span>
+		<select name="sunday" id="sunday">
+			<option>none</option>
+			<option>8:00-9:30</option>
+			<option>10:00-11:30</option>
+			<option>12:00-13:30</option>
+		</select>
+
+		<span name="mon" id="mon">Monday</span>
+		<select name="monday" id="monday">
+			<option>none</option>
+			<option>8:00-9:30</option>
+			<option>10:00-11:30</option>
+			<option>12:00-13:30</option>
+		</select>
+
+		<span name="tue" id="tue">Tuesday</span>
+		<select name="tuesday" id="tuesday">
+			<option>none</option>
+			<option>8:00-9:30</option>
+			<option>10:00-10:45</option>
+			<option>12:00-13:30</option>
+		</select>
+
+		<span name="wen" id="wen">Wensday</span>
+		<select name="wensday" id="wensday">
+			<option>none</option>
+			<option>8:00-9:30</option>
+			<option>10:00-11:30</option>
+			<option>12:00-13:30</option>
+		</select>
+
+		<span name="thu" id="thu">Thursday</span>
+		<select name="thursday" id="thursday">
+			<option>none</option>
+			<option>8:00-9:30</option>
+			<option>10:00-11:30</option>
+			<option>12:00-13:30</option>
+		</select>
+
+		<span name="fri" id="fri">Friday</span>
+		<select name="friday" id="friday">
+			<option>none</option>
+			<option>8:00-9:30</option>
+			<option>10:00-11:30</option>
+			<option>12:00-13:30</option>
+		</select>
+		<input type="submit" value="create class" id='this' name='this'>
+	</form>
+	<form action="http://localhost:5000/sign_in2/show_table" method="POST" name="form2" id="from2">
+		<select id="class_name" name="class_name">
+			{% for row in tab %}
+			<option id="show" name="show">
+				{{ row }}
+			</option>
+			{% endfor %}
+		</select>
+		<input type="submit" value="present class" id="that" name="that">
+	</form>
+</body>
+</html>
