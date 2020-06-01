@@ -4,8 +4,8 @@ from datetime import datetime
 
 class database_connection:
     def __init__(self):
-        self.conn = ''
-        self.cursor = ''
+        self.conn = None
+        self.cursor = None
 
     def connect(self):
         self.conn = psycopg2.connect(dbname='tftyiqbk', user='tftyiqbk', password='ioia30LFy_tPe-xsKDEfSalK-jlBC7j_',
@@ -36,32 +36,31 @@ class database_connection:
 
     def isin(self, table_name, data):
         table_data = self.get_data(table_name)
-        checker = False
         for row in table_data:
             for i in range(len(data)):
                 if row[i] == data[i]:
-                    checker = True
-                    break
-        return checker
+                    return True
+        return False
 
     def sign_in(self, data):
         table_data = self.get_data('project_database')
         for row in table_data:
             if data[0] == row[0] and data[1] == row[1]:
-                return row[7]
+                return row[7][:-1]
         return ''
 
     def signin1(self, data):
         table_data = self.get_data('project_database')
-        cla = ''
         for row in table_data:
             if data == row[0]:
-                return row[7]
+                return row[7][:-1]
             return ''
 
     def times(self, cla):
         self.cursor.execute('select ' + cla + ' from time')
-        return self.cursor.fetchall()[0][0].split(',')
+        for row in  self.cursor.fetchall():
+            if row[0] != None:
+                return row[0]
 
     def on_time(self, data):
         cla = self.sign_in(data)
@@ -106,7 +105,6 @@ class database_connection:
                 day -= 31
                 month += 1
         column_data = column_data[:-2]
-        print(column_data)
         sql = 'create table ' + table_name + ' (' + column_data + ')'
         self.cursor.execute(sql)
         self.conn.commit()
@@ -121,7 +119,8 @@ class database_connection:
         for i in range(len(column_name)):
             column_data += column_name[i] + ' = %s, '
             if len(column_name) - i == 2 and checker:
-                column_data += 'WHERE'
+                column_data = column_data[:-2]
+                column_data += ' WHERE '
         column_data = column_data[:-2]
         sql = 'UPDATE ' + table_name + ' SET ' + column_data
         self.cursor.execute(sql, values)

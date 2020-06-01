@@ -1,6 +1,4 @@
 from flask import Flask, render_template, request
-import psycopg2
-from datetime import datetime
 from database_connection import database_connection
 app = Flask(__name__)
 global database
@@ -9,7 +7,11 @@ database = database_connection()
 
 @app.route('/')
 def student():
-    return render_template('projectHTML.html')
+    global database
+    database.connect()
+    tab = database.table_column('time')
+    database.close_db()
+    return render_template('projectHTML.html', tab = tab)
 
 
 @app.route('/result', methods=['POST', 'GET'])
@@ -25,8 +27,9 @@ def result():
         print(data)
         database.connect()
         if database.isin('project_database', data):
+            tab = database.table_column('time')
             database.close_db()
-            return render_template('projectHTML.hmtl', result='change the name, password or id')
+            return render_template('projectHTML.html', result='change the name, password or id', tab = tab)
         else:
             database.close_db()
             return render_template('pass.html')
@@ -48,18 +51,18 @@ def sign_in2():
         data = []
         for i in range(1, 4, 2):
             data.append(num[i][2:-2])
+        database.connect()
         if data[0] == 'admin' and data[1] == 'admin123':
-            database.connect()
             tab = database.table_column('time')
-            print(tab)
+            database.close_db()
             return render_template('admin.html', tab = tab)
         elif database.isin('project_database', data):
-            database.connect()
             print(database.on_time(data))
             if database.on_time(data):
                 database.close_db()
                 return render_template('pass.html')
             else:
+                database.close_db()
                 return render_template('signin.html', aaa = 'your lesson is not now')
         else:
             return render_template('signinn.html', aaa = 'the password or name is incoreect')
@@ -69,12 +72,9 @@ def sign_in2():
 def show_table():
     global database
     if request.method == 'POST':
-        result = request.form
-        result = str(result)[:-2]
-        result = result.split(',')
-        result = result[1][2:-2]
         database.connect()
-        table = database.do(database.signin1(result))
+        result = request.form.get('class_name')
+        table = database.do(result)
         database.close_db()
         return render_template('show_table.html', table = table)
 
@@ -83,21 +83,19 @@ def show_table():
 def delete():
     global database
     if request.method == 'POST':
-        result = request.form
-        result = str(result)[:-2]
-        result = result.split(',')
-        result = result[1][2:-2]
+        result = request.form.get('delete')
         database.connect()
-        if database.isin('project_database', result):
+        class_name = database.signin1(result)
+        if database.isin('project_database', [result]):
             database.delete('project_database', result)
-            database.delete(database.signin1(result), result)
-            table = database.do(database.signin1(result))
+            database.delete(class_name, result)
+            table = database.do(class_name)
             database.close_db()
             return render_template('show_table.html', table=table)
         else:
-            table = database.do(database.signin1(result))
+
             database.close_db()
-            return render_template('show_table.html', pro='this user is not exist', table=table)
+            return render_template('show_table.html', pro='this user is not exist', table=result)
 
 
 @app.route('/sign_in2/create', methods=['POST', 'GET'])
@@ -107,23 +105,28 @@ def create():
         days = ['sunday', 'monday', 'tuesday', 'wensday', 'thursday', 'friday']
         option_data = ''
         for i in range(len(days)):
+            print(days[i])
             if str(request.form.get(days[i])) != 'none':
-                days[i] = i
-                option_data += (str(request.form.get(days[i])).replace('-', ',').replace(':', '')) + ',' + days[i] + ','
+                option_data += str(request.form.get(days[i])).replace('-', ',').replace(':', '') + ',' + days[i] + ','
+                days[i] = i + 1
             else:
-                days.remove(days[i])
-            counter += 1
-        print(days)
-        option_data = option_data[:-1]
-        database.connect()
-        table_name = request.form.get('asd')
-        days.insert(0, 'name varchar(20), ')
-        database.create(table_name, days)
-        database.add_column('time', table_name + ' varchar(60), ')
-        database.insert('time', table_name, option_data)
-        database.close_db()
-        return render_template('admin.html')
-
-
+                days[i] = ''
+        days = list(dict.fromkeys(days))
+        try:
+            days.remove('')
+        finally:
+            print(days)
+            option_data = option_data[:-1]
+            database.connect()
+            table_name = request.form.get('asd')
+            if database.isin('time', table_name):
+                return render_template('admin.html', dudu = 'this class is exist')
+            days.insert(0, 'name varchar(20), ')
+            database.create(table_name, days)
+            database.add_column('time', table_name)
+            database.insert('time', [table_name], option_data)
+            tab = database.table_column('time')
+            database.close_db()
+            return render_template('admin.html', tab = tab)
 if __name__ == '__main__':
     app.run()
