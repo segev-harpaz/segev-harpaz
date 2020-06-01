@@ -26,9 +26,9 @@ def GET_print(packet1):
     del x[3]
     del columns[3]
     database.connect()
-    x.append(str(packet1[0][Ether].src))
-    columns.append('mac')
-    print(x)
+    x.insert(3, str(packet1[0][Ether].src))
+    columns.insert(3, 'mac')
+    print(not(database.isin('project_database', x)))
     if not(database.isin('project_database', x)):
         a = ['connected_wifi', 'connected_time', 'connected_signin','on_time']
         columns = columns + a
@@ -39,7 +39,7 @@ def GET_print(packet1):
         database.insert('project_database', columns, x)
         print(x[3])
         print(x[0])
-        database.insert(x[3][:-1], ['name'], [x[0]])
+        database.insert(x[4][:-1], ['name'], [x[0]])
     database.close_db()
 
 
@@ -69,17 +69,19 @@ def dudu(q):
     if not q:
         return create_q()
     database.connect()
-    column = ['connected_wifi', 'connected_signin, connected_time']
+    column = ['connected_wifi', 'connected_signin', 'connected_time']
     values = (False, False, False)
     database.update('project_database', column, values, False)
     data = q.pop(0)
     database.close_db()
-    Timer(data, dudu, args=q).start()
+    Timer(data, dudu, [q]).start()
 
 
 def arrive_late(q):
     global database
+    print(2)
     if not q:
+        print(1)
         return create_q()
     database.connect()
     table_data = database.get_data('project_database')
@@ -101,16 +103,16 @@ def arrive_late(q):
                 database.update(row[7][:-1], columns, values, True)
     data = q.pop(0)
     database.close_db()
-    Timer(data, arrive_late, q).start()
+    Timer(data, arrive_late, [q]).start()
 
 
 def create_q():
     q = [timedelta(hours=2).total_seconds(), timedelta(hours=2).total_seconds(),
-         timedelta(hours=1.75).total_seconds()]
+         timedelta(hours=2).total_seconds()]
     now = datetime.now().strftime('%H:%M:%S')
     now = datetime.strptime(now, '%H:%M:%S')
-    reset_connection = datetime.strptime('23:45:00', "%H:%M:%S")
-    late_check = datetime.strptime('2:03:00', "%H:%M:%S")
+    reset_connection = datetime.strptime('08:20:00', "%H:%M:%S")
+    late_check = datetime.strptime('08:15:00', "%H:%M:%S")
     delay = (reset_connection - now).total_seconds()
     delay1 = (late_check - now).total_seconds()
     if delay < 0:
