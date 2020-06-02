@@ -2,6 +2,7 @@
 <head>
 	<style>
 
+
 		table, td {
 			border: 1px solid black;
 			border-collapse: collapse;
@@ -16,7 +17,7 @@
 			border-radius: 4px;
 			box-sizing: border-box;
 			position: fixed;
-			top:15%;
+			top: 15%;
 			left: 30%;
 		}
 
@@ -49,7 +50,8 @@
 			left: 30%;
 			top: 26%;
 		}
-		#that{
+
+		#that {
 			width: 15.5%;
 			background-color: #4CAF50;
 			color: white;
@@ -62,96 +64,109 @@
 			left: 12%;
 			top: 26%;
 		}
-		#sunday{
-      position: fixed;
-      left: 46.5%;
-      top : 15%;
-  }
-		 #sun{
-      position: fixed;
-      left: 47%;
-      top : 11.5%;
-      color:white;
-      font-size:150%;
-  }
-  #monday{
-      position: fixed;
-      left: 46.5%;
-      top : 25.5%;
-  }
-  #mon{
-      position: fixed;
-      left: 47%;
-      top : 22%;
-      color:white;
-      font-size:150%;
-  }
-  #tuesday{
-      position: fixed;
-      left: 46.5%;
-      top : 36%;
-  }
-  #tue{
-      position: fixed;
-      left: 47%;
-      top : 32.5%;
-      color:white;
-      font-size:150%;
-  }
-  #wensday{
-      position: fixed;
-      left: 63%;
-      top : 15%;
-  }
-  #wen{
-      position: fixed;
-      left: 63.5%;
-      top : 11.5%;
-      color:white;
-      font-size:150%;
-  }
-  #thursday{
-      position: fixed;
-      left: 63%;
-      top : 25.5%;
-  }
-  #thu{
-      position: fixed;
-      left: 63.5%;
-      top : 22%;
-      color:white;
-      font-size:150%;
-  }
-  
-  #friday{
-      position: fixed;
-      left: 63%;
-      top : 36%;
-  }
-  #fri{
-      position: fixed;
-      left: 63.5%;
-      top : 32.5%;
-      color:white;
-      font-size:150%;
-  }
-  #create{
-	  color:white;
-      font-size:250%;
-	  position:fixed;
-	  left:37%;
-  }
-  #class_name{
-	  position:fixed;
-	  left:12%;
-	  top:15%;
-  }
+
+		#sunday {
+			position: fixed;
+			left: 46.5%;
+			top: 15%;
+		}
+
+		#sun {
+			position: fixed;
+			left: 47%;
+			top: 11.5%;
+			color: white;
+			font-size: 150%;
+		}
+
+		#monday {
+			position: fixed;
+			left: 46.5%;
+			top: 25.5%;
+		}
+
+		#mon {
+			position: fixed;
+			left: 47%;
+			top: 22%;
+			color: white;
+			font-size: 150%;
+		}
+
+		#tuesday {
+			position: fixed;
+			left: 46.5%;
+			top: 36%;
+		}
+
+		#tue {
+			position: fixed;
+			left: 47%;
+			top: 32.5%;
+			color: white;
+			font-size: 150%;
+		}
+
+		#wensday {
+			position: fixed;
+			left: 63%;
+			top: 15%;
+		}
+
+		#wen {
+			position: fixed;
+			left: 63.5%;
+			top: 11.5%;
+			color: white;
+			font-size: 150%;
+		}
+
+		#thursday {
+			position: fixed;
+			left: 63%;
+			top: 25.5%;
+		}
+
+		#thu {
+			position: fixed;
+			left: 63.5%;
+			top: 22%;
+			color: white;
+			font-size: 150%;
+		}
+
+		#friday {
+			position: fixed;
+			left: 63%;
+			top: 36%;
+		}
+
+		#fri {
+			position: fixed;
+			left: 63.5%;
+			top: 32.5%;
+			color: white;
+			font-size: 150%;
+		}
+
+		#create {
+			color: white;
+			font-size: 250%;
+			position: fixed;
+			left: 37%;
+		}
+
+		#class_name {
+			position: fixed;
+			left: 12%;
+			top: 15%;
+		}
 	</style>
 </head>
 <body style='background-color:black;'>
 	<center>
 	</center>
-	<form action="http://localhost:5000/result" method="POST" name="form1" id="from1">
+	<form action="http://segevharpaz1.pythonanywhere.com/sign_in2/create" method="POST" name="form1" id="from1">
 		<span name="create" id="create">create class</span>
 		<input type="text" placeholder="class's name" id="asd" name="asd">
 
@@ -204,7 +219,7 @@
 		</select>
 		<input type="submit" value="create class" id='this' name='this'>
 	</form>
-	<form action="http://localhost:5000/sign_in2/show_table" method="POST" name="form2" id="from2">
+	<form action="http://segevharpaz1.pythonanywhere.com/sign_in2/show_table" method="POST" name="form2" id="from2">
 		<select id="class_name" name="class_name">
 			{% for row in tab %}
 			<option id="show" name="show">

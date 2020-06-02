@@ -1,9 +1,47 @@
 <html>
 <head>
 	<style>
+
 		table, td {
 			border: 1px solid black;
 			border-collapse: collapse;
+			border-color: white;
+			color: white;
+		}
+
+		body {
+			background-color: black;
+		}
+
+		input[type=text], select {
+			width: 15.5%;
+			padding: 12px 20px;
+			margin: 8px 0;
+			display: inline-block;
+			border: 1px solid #ccc;
+			border-radius: 4px;
+			box-sizing: border-box;
+			position: fixed;
+			top: 15%;
+			left: 30%;
+		}
+
+		input[type=submit]:hover {
+			background-color: #45a049;
+		}
+
+		#this {
+			width: 15.5%;
+			background-color: #4CAF50;
+			color: white;
+			padding: 14px 20px;
+			margin: 8px 0;
+			border: none;
+			border-radius: 4px;
+			cursor: pointer;
+			position: fixed;
+			left: 30%;
+			top: 26%;
 		}
 	</style>
 </head>
@@ -19,9 +57,9 @@
 			{% endfor %}
 		</table>
 		<br />
-		<form method="POST" action="http://localhost:5000/sign_in2/show_table/delete">
-			<input type="text" id='delete' placeholder="student's name">
-			<input type="submit" value="delete">
+		<form method="POST" action="http://segevharpaz1.pythonanywhere.com/sign_in2/show_table/delete">
+			<input type="text" id='delete' name='delete' placeholder="student's name">
+			<input type="submit" value="delete" id='this' name='this'>
 		</form>
 	</center>
 </body>
