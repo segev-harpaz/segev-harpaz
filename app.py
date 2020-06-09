@@ -29,6 +29,8 @@ def result():
         num = result1.split(',')
         data = []
         for i in range(1, 6, 2):
+            if str(num[i][2:-2]) == '':
+                return render_template('projectHTML.html', result='you must fill the form')
             data.append(str(num[i][2:-2]))
         try:
             database.connect()
@@ -58,6 +60,8 @@ def sign_in2():
         num = result1.split(',')
         data = []
         for i in range(1, 4, 2):
+            if num[i][2:-2] == '':
+                return render_template('signin.html', aaa='you must fill the form')
             data.append(num[i][2:-2])
 
         database.connect()
