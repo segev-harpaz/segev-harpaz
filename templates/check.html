@@ -10,11 +10,8 @@
 <body>
 	<center>
 	</center>
-	<form method="POST" action="http://localhost:5000/result">
-		<select>
-			<option>delete student</option>
-			<option>change the connection status</option>
-		</select>
+	<form>
+		<input type="text" placeholder="name" pattern="{1,}[0-9a-zA-Z]+" title="only digits and character and at least 1 digits or character" />
 		<input type="submit" value="change">
 	</form>
 </body>

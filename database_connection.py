@@ -1,5 +1,5 @@
 import psycopg2
-from datetime import datetime
+from datetime import datetime, date
 
 
 class database_connection:
@@ -54,7 +54,7 @@ class database_connection:
         for row in table_data:
             if data == row[0]:
                 return row[7][:-1]
-            return ''
+        return ''
 
     def times(self, cla):
         self.cursor.execute('select ' + cla + ' from time')
@@ -69,8 +69,9 @@ class database_connection:
             date = datetime.now()
             day_now = date.strftime("%A")
             time_now = str(int(date.strftime("%H%M")) + 300)
+            time = time.split(',')
             for i in range(0, len(time), 3):
-                if day_now.lower() == time[i + 2] and int(time[i]) - 5 < int(time_now) < int(time[i]) + 15:
+                if day_now.lower() == time[i + 2] and int(515) - 5 < int(time_now) < int(515) + 15:
                     return True
             return False
 
@@ -90,16 +91,31 @@ class database_connection:
         sql = sql[:-2]
         sql += ')'
         print(sql)
-        self.cursor.execute(sql, [values])
+        self.cursor.execute(sql, values)
         self.conn.commit()
 
     def create(self, table_name, columns):
         column_data = columns[0]
         columns.remove(columns[0])
-        month = 5
-        day = 30
+        today = str(date.today())[5:]
+        today = today.split('-')
+        for i in range(len(today)):
+            today[i] = today[i].replace('0','')
+        month = int(today[0])
+        day = int(today[1])
+        for i in range(7):
+            if (columns[0] == (date.today().weekday()+ 2 + i) % 7):
+                break
+            else:
+                day +=1
+                if day > 31:
+                    day=1
+                    month += 1
         for i in range(30):
-            column_data += 'a' + str(month) + str(day) + ' varchar(1), '
+            if day < 10:
+                column_data += 'a' + str(month) + '0' + str(day) + ' varchar(1), '
+            else:
+                column_data += 'a' + str(month) + str(day) + ' varchar(1), '
             day += int(columns[i % len(columns)])
             if day > 31:
                 day -= 31
@@ -133,6 +149,7 @@ class database_connection:
             date = datetime.now()
             day_now = date.strftime("%A")
             time_now = str(int(date.strftime("%H%M")) + 300)
+            time = time.split(',')
             for i in range(0, len(time), 3):
                 if day_now.lower() == time[i + 2] and int(time[i]) - 5 < int(time_now) < int(time[i]) + 2:
                     return True
